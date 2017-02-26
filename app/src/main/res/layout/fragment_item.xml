@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="8dp"
+    android:background="#ffffff"
+    android:elevation="8dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/mainListItemLayout"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height= "wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/professorx"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"/>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/txtUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:text="Username"
+        android:layout_gravity="left"
+        android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+        android:id="@+id/txtPostDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:text="26th Feb 2017"
+            android:layout_gravity="left"
+        android:textSize="10dp" />
+</LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Post Content Post Content Post Content Post Content Post Content"
+        android:layout_gravity="left"
+        android:textSize="18dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        >
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="15dp"
+            android:src="@mipmap/star_not_clicked"
+            android:id="@+id/ivFavorite"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="15dp"
+            android:src="@mipmap/share"
+            android:id="@+id/ivShare"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+</LinearLayout>
