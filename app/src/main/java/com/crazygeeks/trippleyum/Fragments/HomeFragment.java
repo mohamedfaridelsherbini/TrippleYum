@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.crazygeeks.trippleyum.ListAdapters.HomeRecyclerViewAdapter;
 import com.crazygeeks.trippleyum.Models.MainListModel;
 import com.crazygeeks.trippleyum.R;
 
@@ -82,27 +83,27 @@ public class HomeFragment extends Fragment {
                 "Basma Ramadan" , "Rana Ghonem" , "Mohamed Shawky" , "Nada Mekkawy",
                 "Basma Ramadan" , "Rana Ghonem" , "Mohamed Shawky" , "Nada Mekkawy"};
         String[] posts = {"Ghaly caffe is offering a very chocolaty, tasty Chocolate cake" ,
-                "You must follow your diet and never rune it :D" ,
+                "You must follow your diet and never ruin it :D" ,
                 "You can find a very wonderful cheese cake in Spectra cairo" ,
                 "I love coffee and chocolate more than rana :D :D :D",
                 "Ghaly caffe is offering a very chocolaty, tasty Chocolate cake" ,
-                "You must follow your diet and never rune it :D" ,
+                "You must follow your diet and never ruin it :D" ,
                 "You can find a very wonderful cheese cake in Spectra cairo" ,
                 "I love coffee and chocolate more than rana :D :D :D",
                 "Ghaly caffe is offering a very chocolaty, tasty Chocolate cake" ,
-                "You must follow your diet and never rune it :D" ,
+                "You must follow your diet and never ruin it :D" ,
                 "You can find a very wonderful cheese cake in Spectra cairo" ,
                 "I love coffee and chocolate more than rana :D :D :D",
                 "Ghaly caffe is offering a very chocolaty, tasty Chocolate cake" ,
-                "You must follow your diet and never rune it :D" ,
+                "You must follow your diet and never ruin it :D" ,
                 "You can find a very wonderful cheese cake in Spectra cairo" ,
                 "I love coffee and chocolate more than rana :D :D :D",
                 "Ghaly caffe is offering a very chocolaty, tasty Chocolate cake" ,
-                "You must follow your diet and never rune it :D" ,
+                "You must follow your diet and never ruin it :D" ,
                 "You can find a very wonderful cheese cake in Spectra cairo" ,
                 "I love coffee and chocolate more than rana :D :D :D",
                 "Ghaly caffe is offering a very chocolaty, tasty Chocolate cake" ,
-                "You must follow your diet and never rune it :D" ,
+                "You must follow your diet and never ruin it :D" ,
                 "You can find a very wonderful cheese cake in Spectra cairo" ,
                 "I love coffee and chocolate more than rana :D :D :D"};
         int[] favStats = {0 , 1 , 1 , 0,

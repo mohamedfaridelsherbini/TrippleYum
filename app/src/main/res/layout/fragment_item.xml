@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="8dp"
+    android:layout_margin="4dp"
     android:background="#ffffff"
     android:elevation="8dp"
     >
@@ -39,6 +40,7 @@
         android:layout_margin="@dimen/text_margin"
         android:text="Username"
         android:layout_gravity="left"
+        android:textColor="#696969"
         android:textAppearance="?attr/textAppearanceListItem" />
         <TextView
         android:id="@+id/txtPostDate"
@@ -46,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/text_margin"
         android:text="26th Feb 2017"
+            android:textColor="#696969"
             android:layout_gravity="left"
         android:textSize="10dp" />
 </LinearLayout>
@@ -59,6 +62,7 @@
         android:layout_margin="15dp"
         android:text="Post Content Post Content Post Content Post Content Post Content"
         android:layout_gravity="left"
+        android:textColor="#696969"
         android:textSize="18dp" />
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,6 +87,7 @@
     </LinearLayout>
 
 </LinearLayout>
+
 
 
 </LinearLayout>

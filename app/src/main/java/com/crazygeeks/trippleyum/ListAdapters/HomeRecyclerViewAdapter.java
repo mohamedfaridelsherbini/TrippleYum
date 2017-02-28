@@ -1,4 +1,4 @@
-package com.crazygeeks.trippleyum.Fragments;
+package com.crazygeeks.trippleyum.ListAdapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.crazygeeks.trippleyum.Anim.SlideAnimation;
 import com.crazygeeks.trippleyum.Fragments.HomeFragment.OnListFragmentInteractionListener;
 import com.crazygeeks.trippleyum.Models.MainListModel;
 import com.crazygeeks.trippleyum.R;
