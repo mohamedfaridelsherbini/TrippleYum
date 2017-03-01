@@ -44,7 +44,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         favState = 0;
-        holder.mIVfavourite.setImageResource(R.mipmap.star_not_clicked);
+        holder.mIVfavourite.setImageResource(R.drawable.star_not_clicked);
         holder.mItem = mValues.get(position);
         holder.mUserName.setText(mValues.get(position).userName);
         holder.mPostContent.setText(mValues.get(position).postContent);
@@ -63,9 +63,9 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         });
         favState = mValues.get(position).favState;
         if(favState == 0) {
-            holder.mIVfavourite.setImageResource(R.mipmap.star);
+            holder.mIVfavourite.setImageResource(R.drawable.star);
         }else{
-            holder.mIVfavourite.setImageResource(R.mipmap.star_not_clicked);
+            holder.mIVfavourite.setImageResource(R.drawable.star_not_clicked);
         }
 
     }

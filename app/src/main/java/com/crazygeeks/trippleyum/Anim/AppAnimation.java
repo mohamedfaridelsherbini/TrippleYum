@@ -20,7 +20,38 @@ import com.crazygeeks.trippleyum.R;
 
 public class AppAnimation {
 
+    public static void animateViewUpThenCircularize(View view , Context context) {
 
+        int sdkVersion = android.os.Build.VERSION.SDK_INT;
+        if(sdkVersion >= 21) {
+            upThenCircularize(view, context);
+        }
+
+    }
+
+    public static void animateCircularize(final View view) {
+
+        int sdkVersion = android.os.Build.VERSION.SDK_INT;
+
+        if(sdkVersion >= 21){
+            ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void onGlobalLayout() {
+                        AppAnimation.circularRevealActivity(view).setDuration(1500).start();
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                            view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        } else {
+                            view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                    }
+                });
+            }
+        }
+
+    }
 
     public static void upThenCircularize(final View view , Context context){
 

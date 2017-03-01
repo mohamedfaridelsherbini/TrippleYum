@@ -4,7 +4,7 @@
     <item name="ic_menu_nearby" type="drawable">@drawable/ic_menu_nearby</item>
     <item name="ic_menu_shops" type="drawable">@drawable/ic_store</item>
     <item name="ic_menu_aboutus" type="drawable">@drawable/ic_aboutus</item>
-    <item name="ic_menu_contactus" type="drawable">@drawable/ic_menu_contactus</item>
+    <item name="ic_menu_contactus" type="drawable">@drawable/ic_sms</item>
     <item name="ic_menu_radio" type="drawable">@drawable/ic_radio</item>
     <item name="ic_menu_signout" type="drawable">@drawable/ic_logout</item>
 </resources>

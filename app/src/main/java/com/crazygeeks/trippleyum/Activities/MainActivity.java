@@ -24,6 +24,7 @@ import com.crazygeeks.trippleyum.R;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,HomeFragment.OnListFragmentInteractionListener{
 
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,23 +34,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-        ViewTreeObserver viewTreeObserver = fab.getViewTreeObserver();
-        if (viewTreeObserver.isAlive()) {
-            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                @Override
-                public void onGlobalLayout() {
-                    AppAnimation.circularRevealActivity(fab).setDuration(1500).start();
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                        fab.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                    } else {
-                        fab.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    }
-                }
-            });
-        }
-
+        AppAnimation.animateCircularize(fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

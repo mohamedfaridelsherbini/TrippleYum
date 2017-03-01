@@ -1,5 +1,6 @@
 package com.crazygeeks.trippleyum.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 
 import com.crazygeeks.trippleyum.Anim.AppAnimation;
 import com.crazygeeks.trippleyum.R;
+
+import static com.crazygeeks.trippleyum.Anim.AppAnimation.animateViewUpThenCircularize;
 
 /**
  * Created by mymac on 2/28/17.
@@ -40,12 +43,9 @@ public class LoginActivity extends AppCompatActivity {
         inputEmail = (EditText) findViewById(R.id.input_email);
         inputPassword = (EditText) findViewById(R.id.input_password);
         btnSignUp = (Button) findViewById(R.id.btn_signup);
-
-        AppAnimation.upThenCircularize(btnSignUp , LoginActivity.this);
-
         inputEmail.addTextChangedListener(new MyTextWatcher(inputEmail));
         inputPassword.addTextChangedListener(new MyTextWatcher(inputPassword));
-
+        animateViewUpThenCircularize(btnSignUp , LoginActivity.this);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     /**
      * Validating form

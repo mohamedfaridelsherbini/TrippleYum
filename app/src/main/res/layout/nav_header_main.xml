@@ -17,7 +17,7 @@
         android:id="@+id/profile_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@mipmap/professorx"
+        android:src="@drawable/professorx"
         android:layout_margin="10dp"
         />
 
