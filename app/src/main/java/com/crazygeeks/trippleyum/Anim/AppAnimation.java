@@ -50,7 +50,6 @@ public class AppAnimation {
                 });
             }
         }
-
     }
 
     public static void upThenCircularize(final View view , Context context){
