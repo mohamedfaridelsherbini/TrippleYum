@@ -72,7 +72,6 @@ public class AppAnimation {
                 }
             });
         }
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

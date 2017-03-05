@@ -24,7 +24,14 @@
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".RadioService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <receiver android:name=".RadioReciever"></receiver>
     </application>
 
 </manifest>

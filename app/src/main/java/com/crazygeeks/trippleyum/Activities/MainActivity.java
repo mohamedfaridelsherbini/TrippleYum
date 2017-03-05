@@ -1,5 +1,6 @@
 package com.crazygeeks.trippleyum.Activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -18,8 +19,10 @@ import android.view.ViewTreeObserver;
 
 import com.crazygeeks.trippleyum.Anim.AppAnimation;
 import com.crazygeeks.trippleyum.Fragments.HomeFragment;
+import com.crazygeeks.trippleyum.Fragments.RadioFragment;
 import com.crazygeeks.trippleyum.Models.MainListModel;
 import com.crazygeeks.trippleyum.R;
+import com.crazygeeks.trippleyum.RadioService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,HomeFragment.OnListFragmentInteractionListener{
@@ -33,16 +36,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        AppAnimation.animateCircularize(fab);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -95,8 +88,11 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_profile) {
-            // Handle the camera action
+        if (id == R.id.nav_home) {
+            HomeFragment homeFragment = new HomeFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.mainFragContainer , homeFragment).commit();
+        } else if (id == R.id.nav_profile) {
+
         } else if (id == R.id.nav_favorite) {
 
         } else if (id == R.id.nav_nearby) {
@@ -108,11 +104,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_contactus) {
 
         } else if (id == R.id.nav_radio) {
+            RadioFragment radioFragment = new RadioFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.mainFragContainer , radioFragment).commit();
 
     } else if (id == R.id.nav_logout) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -122,5 +119,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(MainListModel item) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(MainActivity.this, RadioService.class));
     }
 }
