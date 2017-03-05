@@ -20,11 +20,15 @@
         <activity
             android:name=".Activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.HomeActivity" />
+        <activity
+            android:name=".Activities.SignupActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <service android:name=".RadioService"></service>
+        <receiver android:name=".RadioReciever"></receiver>
     </application>
 
 </manifest>

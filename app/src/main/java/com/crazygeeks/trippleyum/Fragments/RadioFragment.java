@@ -106,8 +106,7 @@ public class RadioFragment extends Fragment {
                 }
                 RadioService.YIRUMA_CHECK = 1;
                 RadioService.yirumaPaths = new String[]{"https://ia600208.us.archive.org/10/items/RiverFlowsInYou_706/Yiruma-riverFlowsInYou.mp3",
-                "https://ia600504.us.archive.org/15/items/KissTheRain_Yiruma/KissTheRain-yiruma.mp3",
-                ""};
+                "https://ia600504.us.archive.org/15/items/KissTheRain_Yiruma/KissTheRain-yiruma.mp3"};
                 playRadio();
             }
         });
