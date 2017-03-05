@@ -3,7 +3,6 @@
     package="com.crazygeeks.trippleyum">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -21,16 +20,11 @@
         <activity
             android:name=".Activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.HomeActivity" />
         <activity
             android:name=".Activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <service
-            android:name=".RadioService"
-            android:enabled="true"
-            android:exported="true"></service>
-
-        <receiver android:name=".RadioReciever"></receiver>
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
