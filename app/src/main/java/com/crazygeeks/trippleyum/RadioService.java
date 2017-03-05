@@ -15,6 +15,9 @@ import java.util.concurrent.TimeUnit;
 
 public class RadioService extends IntentService {
     public static MediaPlayer mp;
+    public static String radioPath;
+    public static String[] yirumaPaths;
+    public static int YIRUMA_CHECK = 0;
     @Override
     protected void onHandleIntent(Intent intent) {
 
@@ -34,8 +37,11 @@ public class RadioService extends IntentService {
 
         mp = new MediaPlayer();
         try {
-//            http://streaming.radionomy.com/ABC-Opera
-            mp.setDataSource("http://pianosolo.streamguys.net/live");
+            if(YIRUMA_CHECK == 1) {
+                mp.setDataSource(yirumaPaths[0]);
+            }else{
+                mp.setDataSource(radioPath);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,7 +57,30 @@ public class RadioService extends IntentService {
             }
         });
 
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                try {
+                    mp.stop();
+                    mp = new MediaPlayer();
+                    mp.setDataSource(yirumaPaths[1]);
 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    mp.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        mp.start();
+                    }
+                });
+            }
+        });
         return START_STICKY;
     }
 
