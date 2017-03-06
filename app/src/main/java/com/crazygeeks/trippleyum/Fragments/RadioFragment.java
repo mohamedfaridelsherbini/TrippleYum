@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -59,7 +60,7 @@ public class RadioFragment extends Fragment {
                     StopService();
                 }
                 playRadio();
-                createNotification();
+                createNotification("");
                 ivStopStream.setVisibility(View.VISIBLE);
                 ivStartStream.setVisibility(View.INVISIBLE);
             }
@@ -76,7 +77,7 @@ public class RadioFragment extends Fragment {
         btPiano.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startStation("http://pianosolo.streamguys.net/live");
+                startStation("http://pianosolo.streamguys.net/live" , "Solo Piano");
             }
         });
 
@@ -84,14 +85,14 @@ public class RadioFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                startStation("http://streaming.radionomy.com/BeethovenRadio-?lang=en-US%2cen%3bq%3d0.8");
+                startStation("http://streaming.radionomy.com/BeethovenRadio-?lang=en-US%2cen%3bq%3d0.8" , "Beethoven");
             }
         });
 
         btMozart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startStation("http://streaming.radionomy.com/Mozart?lang=en-US%2cen%3bq%3d0.8");
+                startStation("http://streaming.radionomy.com/Mozart?lang=en-US%2cen%3bq%3d0.8" , "Mozart");
             }
         });
         btYiruma.setOnClickListener(new View.OnClickListener() {
@@ -103,8 +104,12 @@ public class RadioFragment extends Fragment {
                 }
                 RadioService.YIRUMA_CHECK = 1;
                 RadioService.yirumaPaths = new String[]{"https://ia600208.us.archive.org/10/items/RiverFlowsInYou_706/Yiruma-riverFlowsInYou.mp3",
-                "https://ia600504.us.archive.org/15/items/KissTheRain_Yiruma/KissTheRain-yiruma.mp3"};
+                "https://ia600504.us.archive.org/15/items/KissTheRain_Yiruma/KissTheRain-yiruma.mp3",
+                "https://ia801001.us.archive.org/25/items/YirumaFirstLove/Yiruma-First%20Love.mp3",
+                "https://ia601701.us.archive.org/34/items/YirumaMaybe/Yiruma%20-%20Maybe.mp3",
+                "https://ia800504.us.archive.org/17/items/LoveMe_Yiruma/Yiruma-LoveMe.mp3"};
                 playRadio();
+                createNotification("Yiruma");
             }
         });
         return view;
@@ -125,7 +130,7 @@ public class RadioFragment extends Fragment {
         mNotificationManager.cancelAll();
     }
 
-    private void startStation(String stationUrl){
+    private void startStation(String stationUrl, String message){
 
         if (isMyServiceRunning(RadioService.class)) {
             getActivity().stopService(new Intent(getActivity(), RadioService.class));
@@ -133,31 +138,23 @@ public class RadioFragment extends Fragment {
         RadioService.YIRUMA_CHECK = 0;
         RadioService.radioPath = stationUrl;
         playRadio();
-        createNotification();
+        createNotification(message);
 
     }
 
-    private void createNotification(){
-
+    private void createNotification(String message){
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(getActivity())
                         .setSmallIcon(R.drawable.ic_radio)
                         .setContentTitle(getActivity().getResources().getString(R.string.app_name))
-                        .setContentText("Radio is playing")
+                        .setContentText(message + " " + "radio is playing")
                         .setOngoing(true)
                         .setAutoCancel(false);
-// Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(getActivity(), MainActivity.class);
         resultIntent.putExtra("Radio_Playing" , 10);
-// The stack builder object will contain an artificial back stack for the
-// started Activity.
-// This ensures that navigating backward from the Activity leads out of
-// your application to the Home screen.
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(getActivity());
-// Adds the back stack for the Intent (but not the Intent itself)
         stackBuilder.addParentStack(MainActivity.class);
-// Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent =
                 stackBuilder.getPendingIntent(
@@ -170,7 +167,6 @@ public class RadioFragment extends Fragment {
 
         NotificationManager mNotificationManager =
                 (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-// mId allows you to update the notification later on.
         mNotificationManager.notify(0, mBuilder.build());
 
     }

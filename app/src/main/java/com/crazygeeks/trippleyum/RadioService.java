@@ -18,6 +18,7 @@ public class RadioService extends IntentService {
     public static String radioPath;
     public static String[] yirumaPaths;
     public static int YIRUMA_CHECK = 0;
+    int CurrentYirumaSong = 0;
     @Override
     protected void onHandleIntent(Intent intent) {
 
@@ -60,25 +61,8 @@ public class RadioService extends IntentService {
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
-                try {
-                    mp.stop();
-                    mp = new MediaPlayer();
-                    mp.setDataSource(yirumaPaths[1]);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    mp.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-                        mp.start();
-                    }
-                });
+                CurrentYirumaSong++;
+                playAllListOfYiruma();
             }
         });
         return START_STICKY;
@@ -88,5 +72,40 @@ public class RadioService extends IntentService {
     public void onDestroy() {
         super.onDestroy();
         mp.stop();
+    }
+
+    private void playAllListOfYiruma(){
+
+        try {
+            mp.stop();
+            mp = new MediaPlayer();
+            mp.setDataSource(yirumaPaths[CurrentYirumaSong]);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            mp.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.start();
+            }
+        });
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                CurrentYirumaSong++;
+                if (CurrentYirumaSong < yirumaPaths.length){
+                    playAllListOfYiruma();
+            }else if (CurrentYirumaSong == yirumaPaths.length){
+                    CurrentYirumaSong = 0;
+                    playAllListOfYiruma();
+                }
+            }
+        });
     }
 }
