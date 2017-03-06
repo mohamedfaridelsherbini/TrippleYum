@@ -1,30 +1,26 @@
 package com.crazygeeks.trippleyum.Fragments;
 
-import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.ApplicationErrorReport;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.crazygeeks.trippleyum.Activities.MainActivity;
 import com.crazygeeks.trippleyum.R;
 import com.crazygeeks.trippleyum.RadioReciever;
 import com.crazygeeks.trippleyum.RadioService;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
 
 /**
  * Created by mymac on 3/1/17.
@@ -60,9 +56,10 @@ public class RadioFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (isMyServiceRunning(RadioService.class)) {
-                    getActivity().stopService(new Intent(getActivity(), RadioService.class));
+                    StopService();
                 }
                 playRadio();
+                createNotification();
                 ivStopStream.setVisibility(View.VISIBLE);
                 ivStartStream.setVisibility(View.INVISIBLE);
             }
@@ -70,7 +67,7 @@ public class RadioFragment extends Fragment {
         ivStopStream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().stopService(new Intent(getActivity(), RadioService.class));
+                StopService();
                 ivStopStream.setVisibility(View.INVISIBLE);
                 ivStartStream.setVisibility(View.VISIBLE);
             }
@@ -102,7 +99,7 @@ public class RadioFragment extends Fragment {
             public void onClick(View view) {
 
                 if (isMyServiceRunning(RadioService.class)) {
-                    getActivity().stopService(new Intent(getActivity(), RadioService.class));
+                    StopService();
                 }
                 RadioService.YIRUMA_CHECK = 1;
                 RadioService.yirumaPaths = new String[]{"https://ia600208.us.archive.org/10/items/RiverFlowsInYou_706/Yiruma-riverFlowsInYou.mp3",
@@ -121,6 +118,13 @@ public class RadioFragment extends Fragment {
 
     }
 
+    private void StopService(){
+        getActivity().stopService(new Intent(getActivity(), RadioService.class));
+        NotificationManager mNotificationManager =
+                (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.cancelAll();
+    }
+
     private void startStation(String stationUrl){
 
         if (isMyServiceRunning(RadioService.class)) {
@@ -129,6 +133,45 @@ public class RadioFragment extends Fragment {
         RadioService.YIRUMA_CHECK = 0;
         RadioService.radioPath = stationUrl;
         playRadio();
+        createNotification();
+
+    }
+
+    private void createNotification(){
+
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(getActivity())
+                        .setSmallIcon(R.drawable.ic_radio)
+                        .setContentTitle(getActivity().getResources().getString(R.string.app_name))
+                        .setContentText("Radio is playing")
+                        .setOngoing(true)
+                        .setAutoCancel(false);
+// Creates an explicit intent for an Activity in your app
+        Intent resultIntent = new Intent(getActivity(), MainActivity.class);
+        resultIntent.putExtra("Radio_Playing" , 10);
+// The stack builder object will contain an artificial back stack for the
+// started Activity.
+// This ensures that navigating backward from the Activity leads out of
+// your application to the Home screen.
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getActivity());
+// Adds the back stack for the Intent (but not the Intent itself)
+        stackBuilder.addParentStack(MainActivity.class);
+// Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
+        mBuilder.setContentIntent(resultPendingIntent);
+
+
+        NotificationManager mNotificationManager =
+                (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+// mId allows you to update the notification later on.
+        mNotificationManager.notify(0, mBuilder.build());
 
     }
 

@@ -26,8 +26,7 @@ import com.crazygeeks.trippleyum.RadioService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,HomeFragment.OnListFragmentInteractionListener{
-
-
+    NavigationView navigationView;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +35,33 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        HomeFragment homeFragment = new HomeFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.mainFragContainer , homeFragment).commit();
+        if(savedInstanceState == null) {
+            Bundle bundle = getIntent().getExtras();
+            if(bundle != null) {
+                int checkNotification = bundle.getInt("Radio_Playing");
+                if (checkNotification == 10) {
+                    navigationView.setCheckedItem(R.id.nav_radio);
+                    RadioFragment radioFragment = new RadioFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainFragContainer, radioFragment).commit();
+                } else {
+
+                }
+            }else{
+                HomeFragment homeFragment = new HomeFragment();
+                getSupportFragmentManager().beginTransaction().add(R.id.mainFragContainer, homeFragment).commit();
+            }
+        }
     }
+
 
     @Override
     public void onBackPressed() {
@@ -115,15 +128,14 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
     @Override
     public void onListFragmentInteraction(MainListModel item) {
 
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        stopService(new Intent(MainActivity.this, RadioService.class));
-    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        stopService(new Intent(MainActivity.this, RadioService.class));
+//    }
 }
