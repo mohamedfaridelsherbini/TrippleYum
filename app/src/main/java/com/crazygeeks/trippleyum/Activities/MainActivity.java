@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,17 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
 
-import com.crazygeeks.trippleyum.Anim.AppAnimation;
 import com.crazygeeks.trippleyum.Fragments.HomeFragment;
 import com.crazygeeks.trippleyum.Fragments.RadioFragment;
 import com.crazygeeks.trippleyum.Models.MainListModel;
 import com.crazygeeks.trippleyum.R;
-import com.crazygeeks.trippleyum.RadioService;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,HomeFragment.OnListFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener , HomeFragment.OnListFragmentInteractionListener{
     NavigationView navigationView;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -105,7 +99,8 @@ public class MainActivity extends AppCompatActivity
             HomeFragment homeFragment = new HomeFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.mainFragContainer , homeFragment).commit();
         } else if (id == R.id.nav_profile) {
-
+            Intent intent = new Intent(MainActivity.this , ProfileActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_favorite) {
 
         } else if (id == R.id.nav_nearby) {
@@ -132,6 +127,7 @@ public class MainActivity extends AppCompatActivity
     public void onListFragmentInteraction(MainListModel item) {
 
     }
+
 //
 //    @Override
 //    protected void onDestroy() {

@@ -40,7 +40,7 @@ public class AppAnimation {
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onGlobalLayout() {
-                        AppAnimation.circularRevealActivity(view).setDuration(1500).start();
+                        AppAnimation.circularRevealActivity(view).setDuration(1000).start();
                         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                             view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                         } else {
